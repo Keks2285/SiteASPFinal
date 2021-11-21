@@ -13,6 +13,14 @@
             background-image: url(https://media.gq.ru/photos/600920aa0400980d57586fbe/m..);
        background-size:100%;
             }
+        .datainput {
+            width: 400px;
+            background: #C0C0C0;
+            text-align: start;
+            margin-top: 100px;
+            border-radius: 10px 10px 10px 10px;
+            font-family: Old London;
+        }
     </style>
 
 
@@ -20,15 +28,15 @@
 <body>
     <center>
         <form asp-action="Authorization"
-              style="vertical-align:central;">
+              style="vertical-align:central; ">
             <div>
                 <input type="text" asp-for="Login" placeholder="Login"
-                       style=" background: #C0C0C0; text-align: start;"
-                       width="100" />
+                       class="datainput"/>
             </div>
             <div>
-                <input type="password" asp-for="Password" placeholder="**********"
-                       style=" background: #C0C0C0; text-align: start;" />
+                <input type="password" asp-for="Password" placeholder="Password"
+                      class="datainput" style="margin-top:5px" />
+
             </div>
             <div>
                 <input type="submit" asp-action="Authorization" style="background:#C0C0C0" value="Войти" class="btn bnt-default" />

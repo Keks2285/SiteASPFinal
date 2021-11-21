@@ -149,3 +149,10 @@ D:\GitHub\SiteASPFinal\AnimeSite\AnimeSite\bin\Debug\netcoreapp3.1\runtimes\win-
 D:\GitHub\SiteASPFinal\AnimeSite\AnimeSite\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.pdb
 D:\GitHub\SiteASPFinal\AnimeSite\AnimeSite\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 D:\GitHub\SiteASPFinal\AnimeSite\AnimeSite\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+D:\GitHub\SiteASPFinal\AnimeSite\AnimeSite\obj\Debug\netcoreapp3.1\Razor\Views\Home\AdminUserPanel.cshtml.g.cs
+D:\GitHub\SiteASPFinal\AnimeSite\AnimeSite\obj\Debug\netcoreapp3.1\Razor\Views\Home\Profile.cshtml.g.cs
+D:\GitHub\SiteASPFinal\AnimeSite\AnimeSite\obj\Debug\netcoreapp3.1\Razor\Views\Home\Delete.cshtml.g.cs
+D:\GitHub\SiteASPFinal\AnimeSite\AnimeSite\obj\Debug\netcoreapp3.1\Razor\Views\Home\Details.cshtml.g.cs
+D:\GitHub\SiteASPFinal\AnimeSite\AnimeSite\obj\Debug\netcoreapp3.1\Razor\Views\Home\Edit.cshtml.g.cs
+D:\GitHub\SiteASPFinal\AnimeSite\AnimeSite\obj\Debug\netcoreapp3.1\Razor\Views\Home\Create.cshtml.g.cs
+D:\GitHub\SiteASPFinal\AnimeSite\AnimeSite\obj\Debug\netcoreapp3.1\Razor\Views\Home\CreatePost.cshtml.g.cs

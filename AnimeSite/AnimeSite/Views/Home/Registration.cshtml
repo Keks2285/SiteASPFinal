@@ -1,13 +1,45 @@
-﻿
+﻿@model AnimeSite.Models.User
 @{
-    ViewData["Title"] = "Registration";
+    ViewData["Title"] = "Регистрация";
 }
 <!DOCTYPE html>
+<html>
 <head>
-    
-    
-    
+    <link href="~/css/site.css" rel="stylesheet" type="text/css">
+    <meta charset="utf-8">
+    <style>
+        body {
+            background-image: url(https://vsthemes.org/uploads/posts/2018-12/1582031635_the-seven-deadly-sins_vsthemes_ru-14.jpg);
+            background-size: 100%;
+        }
+        .datainput {
+            width: 400px;
+            background: white;
+            vertical-align: bottom;
+            border-radius: 10px 10px 10px 10px;
+        }
+/*        input[type="text"]::-webkit-input-placeholder {color: #ccc; }
+        input[type="text"]::-moz-placeholder { color: #ccc; }
+        input[type="email"]::-webkit-input-placeholder {color: #ccc;}
+        input[type="email"]::-moz-placeholder { color: #ccc;}*/
+    </style>
+
+
 </head>
 <body>
-<h1>Registration</h1>
+    <form asp-action="Create" style=" bottom:10%; position:absolute; left:40%">
+        <div class="form-group">
+            <input type="email" asp-for="Email" class="datainput" placeholder="Email" width="400" />
+        </div>
+        <div class="form-group">
+            <input type="text" asp-for="Login" class="datainput" style=" border-inline-color:white" placeholder="Login" width="400" />
+        </div>
+        <div class="form-group">
+            <input type="text" asp-for="Password" class="datainput" placeholder="Password"  width="400" />
+        </div>
+        <div class="form-group">
+            <input type="submit" style="color: black; background: #C0C0C0; position:inherit; margin-left:100px "  value="Зарегистрироваться" class="btn bnt-default" width="400" />
+        </div>
+    </form>
 </body>
+</html>
