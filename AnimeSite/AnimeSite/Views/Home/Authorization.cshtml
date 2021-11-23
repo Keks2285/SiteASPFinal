@@ -1,0 +1,50 @@
+﻿@model AnimeSite.Models.LogUser
+@{
+    ViewData["Title"] = "Авторизация";
+
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="~/css/site.css" rel="stylesheet" type="text/css">
+    <meta charset="utf-8">
+    <style>
+        body {
+            background-image: url(https://media.gq.ru/photos/600920aa0400980d57586fbe/m..);
+       background-size:100%;
+            }
+        .datainput {
+            width: 400px;
+            background: #C0C0C0;
+            text-align: start;
+            margin-top: 100px;
+            border-radius: 10px 10px 10px 10px;
+            font-family: Old London;
+        }
+    </style>
+
+
+</head>
+<body>
+    <center>
+        <form asp-action="Authorization"
+              style="vertical-align:central; ">
+            <div>
+                <input type="text" asp-for="Login" placeholder="Login"
+                       class="datainput"/>
+            </div>
+            <div>
+                <input type="password" asp-for="Password" placeholder="Password"
+                      class="datainput" style="margin-top:5px" />
+
+            </div>
+            <div>
+                <input type="submit" asp-action="Authorization" style="background:#C0C0C0" value="Войти" class="btn bnt-default" />
+            </div>
+            <a asp-action="Registration" asp-controller="home" style="color:darkturquoise">Зарегистрироваться</a>
+        </form>
+
+
+    </center>
+</body>
+</html>

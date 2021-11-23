@@ -1,0 +1,18 @@
+﻿@model AnimeSite.Models.Post
+@{
+    ViewBag.Title = "Создвние поста";
+}
+<form asp-action="create" asp-controller="home">
+    <div class="form-group">
+        <input type="image" asp-for="Photo" class="form-control" placeholder="Email" />
+    </div>
+    <div class="form-group">
+        <input type="number" min="1" max="10" asp-for="Description" class="form-control" placeholder="Login" /> @*максимум 10 минимумм 0*@
+    </div>
+    <div class="form-group" asp-for="UserID"> @*думаю по-другому*@
+       
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Создать" class="btn bnt-default" />
+    </div>
+</form>
