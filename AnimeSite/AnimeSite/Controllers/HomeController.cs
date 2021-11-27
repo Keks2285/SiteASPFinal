@@ -126,11 +126,11 @@ namespace AnimeSite.Controllers
 
         }
         /////////////////////////
-        public async Task<IActionResult> AdminUserPanel(int? id, string? email, int page=1, SortState sortorder = SortState.IdAsc)
+        public async Task<IActionResult> AdminUserPanel(int? id, string email, int page=1, SortState sortorder = SortState.IdAsc)
         {
 
             IQueryable<User> users = db.Users;
-            // Фильтрация или список
+            // Фильтрация или поиск
 
             if (id != null && id > 0)
             {
@@ -182,8 +182,9 @@ namespace AnimeSite.Controllers
         /////////////////////////
         public async Task<IActionResult>  Profile()
         {
-            IQueryable<Post> post = db.Post;
-            int pagesize = 5;
+            IQueryable<Post> post = db.Posts;
+            post= post.Where(p => p.UserId==idOfUser);
+            int pagesize = 10;
             int page = 1;
             var item = await post.Skip((page - 1) * pagesize).Take(pagesize).ToArrayAsync();
 
@@ -196,8 +197,9 @@ namespace AnimeSite.Controllers
         [HttpPost]
         public async Task<IActionResult> CreatePost(Post post)
         {
-           // IQueryable<User> users = db.Users;
-            db.Post.Add(post);
+            // IQueryable<User> users = db.Users;
+            post.UserId = idOfUser;
+            db.Posts.Add(post);
             await db.SaveChangesAsync();
             return View();
         }

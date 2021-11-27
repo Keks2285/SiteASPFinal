@@ -9,7 +9,7 @@ namespace AnimeSite.Models
     public class ApplicationContext : DbContext
     {
         public DbSet<User> Users { get; set; }
-        public DbSet<Post> Post { get; set; }
+        public DbSet<Post> Posts { get; set; }
 
         public ApplicationContext(DbContextOptions<ApplicationContext> option)
         : base(option)
