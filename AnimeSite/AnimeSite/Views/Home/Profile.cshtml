@@ -8,14 +8,20 @@
 
     </head>
     <body>
-        <h1>Ваш профиль</h1>
-        <input type="image" src="" alt="У вас пока нет фото"
-               style="width:100px; height:100px; border-block-color:black; border-width:2px;
-               position:absolute; left:1%; top:5%;" />
-        <a style="font-size:20px" asp-action="CreatePost">Добавить пост</a>
+      <h1>Ваш профиль</h1>
+     <input type="image" src="" alt="У вас пока нет фото"
+      style="width:100px; height:100px; border-block-color:black; border-width:2px;
+      position:absolute; left:1%; top:5%;" />
+        
+      <input type="button" asp-action="CreatePost" style="font-size: 20px;
+      background: #F08080;
+      border-radius: 8px 8px 8px 8px;
+      position: absolute;
+      left: 5px;
+      top: 15%;" value="&nbspДобавить пост&nbsp">                     
         <table>
 
-            @foreach (var item in Model.Post) @*список постов*@
+            @foreach (var item in Model.Post) 
             {
                 <tr>
                     <td style="background-color: lightgray;  border-left-width:1px; border-color:dimgray;">
@@ -32,10 +38,8 @@
                         <a asp-action="Delete" asp-controller="home" asp-route-id="@item.Id"> </a>
                         <a asp-action="Edit" asp-controller="home" asp-route-id="@item.Id"> </a>
                     </td>
-
                 </tr>
             }
-
         </table>
     </body>
 

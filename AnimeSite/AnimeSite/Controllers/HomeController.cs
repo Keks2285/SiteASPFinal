@@ -28,8 +28,12 @@ namespace AnimeSite.Controllers
             User user = await db.Users.FirstOrDefaultAsync(predicate => predicate.Login == a.Login && predicate.Password == a.Password);
             if (user != null)
             {
-                idOfUser = user.Id;
-                return RedirectToAction("AdminUserPanel");               
+                if (user.Admin == true) 
+                {
+                  idOfUser = user.Id;
+                  return RedirectToAction("AdminUserPanel");
+                } else return RedirectToAction("Profile");
+
             }
             return NotFound();
         }
@@ -45,11 +49,18 @@ namespace AnimeSite.Controllers
             return View();
         }
         [HttpPost]
+        public async Task<IActionResult> CreateByAdmin(User user)
+        {
+            db.Users.Add(user);
+            await db.SaveChangesAsync();
+            return RedirectToAction("AdminUserpanel");
+        }
+        [HttpPost]
         public async Task<IActionResult> Create (User user)
         {
             db.Users.Add(user);
             await db.SaveChangesAsync();
-            return RedirectToAction("AdminUserPanel");
+            return RedirectToAction("Authorization");
         }
         public IActionResult Registration()
         {
