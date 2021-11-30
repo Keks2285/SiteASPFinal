@@ -15,8 +15,7 @@ namespace AnimeSite.Controllers
         int idOfUser = 0;
         public HomeController(ApplicationContext context)
         {           
-            db = context;
-           
+            db = context;        
         }
         
         //////////////////////////////////////////
@@ -30,7 +29,7 @@ namespace AnimeSite.Controllers
             User user = await db.Users.FirstOrDefaultAsync(predicate => predicate.Login == a.Login && predicate.Password == a.Password);
             if (user != null)
             {
-                db.savedID = user.Id;
+                idOfUser = user.Id;
                 if (user.Admin == true) 
                 {                 
                   return RedirectToAction("AdminUserPanel");
@@ -211,7 +210,7 @@ namespace AnimeSite.Controllers
         public async Task<IActionResult> CreatePost(Post post)
         {
             // IQueryable<User> users = db.Users;
-            post.UserId = db.savedID;
+            post.UserId = idOfUser;
             db.Posts.Add(post);
             await db.SaveChangesAsync();
            return  RedirectToAction("Profile");

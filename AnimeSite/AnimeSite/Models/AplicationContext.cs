@@ -10,7 +10,6 @@ namespace AnimeSite.Models
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Post> Posts { get; set; }
-        public int savedID { get; set; } 
 
         public ApplicationContext(DbContextOptions<ApplicationContext> option): base(option)
         {
