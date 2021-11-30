@@ -8,25 +8,38 @@
 
     </head>
     <body>
-      <h1>Ваш профиль</h1>
-     <input type="image" src="" alt="У вас пока нет фото"
-      style="width:100px; height:100px; border-block-color:black; border-width:2px;
+        <h1>Ваш профиль</h1>
+        <input type="image" src="" alt="У вас пока нет фото"
+               style="width:100px; height:100px; border-block-color:black; border-width:2px;
       position:absolute; left:1%; top:5%;" />
-        
-      <input type="button" asp-action="CreatePost" style="font-size: 20px;
+
+        <a asp-action="CreatePost" style="font-size: 20px;
       background: #F08080;
       border-radius: 8px 8px 8px 8px;
       position: absolute;
       left: 5px;
-      top: 15%;" value="&nbspДобавить пост&nbsp">                     
+      top: 15%;"> &nbspДобавить пост&nbsp </a>
+        <a asp-action="EditByUser" style="font-size: 20px;
+      background: #F08080;
+      border-radius: 8px 8px 8px 8px;
+      position: absolute;
+      left: 5px;
+      top: 15%;"> &nbspИзменить информацию о себе&nbsp </a>
         <table>
-
-            @foreach (var item in Model.Post) 
+            <tr>
+                <td>
+                    <a>
+                        Описание
+                    </a>
+                </td>
+                <td style="color:dodgerblue">
+                    Оценка
+                </td>
+            </tr>
+            @foreach (var item in Model.Post)
             {
                 <tr>
-                    <td style="background-color: lightgray;  border-left-width:1px; border-color:dimgray;">
-                        @item.Id
-                    </td>
+
                     <td style="border-left-width:1px; border-color:dimgray;">
                         @item.Description
                     </td>

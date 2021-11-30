@@ -14,9 +14,11 @@ namespace AnimeSite.Controllers
         private ApplicationContext db;
         int idOfUser = 0;
         public HomeController(ApplicationContext context)
-        {
+        {           
             db = context;
+           
         }
+        
         //////////////////////////////////////////
         public IActionResult Authorization()
         {
@@ -28,9 +30,9 @@ namespace AnimeSite.Controllers
             User user = await db.Users.FirstOrDefaultAsync(predicate => predicate.Login == a.Login && predicate.Password == a.Password);
             if (user != null)
             {
+                db.savedID = user.Id;
                 if (user.Admin == true) 
-                {
-                  idOfUser = user.Id;
+                {                 
                   return RedirectToAction("AdminUserPanel");
                 } else return RedirectToAction("Profile");
 
@@ -99,22 +101,22 @@ namespace AnimeSite.Controllers
             }
             return NotFound();
         }
-
-
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult EditByUser()
         {
-            if (id != null)
-            {
-                User user = await db.Users.FirstOrDefaultAsync(predicate => predicate.Id == id);
-                if (user != null)
-                {
-                    return View(user);
-                }
-            }
-            return NotFound();
-
+            return View();
         }
-
+        [HttpPost]
+        public async Task<IActionResult> EditByUser(int? id)
+        {           
+            User user = await db.Users.FirstOrDefaultAsync(predicate => predicate.Id == 1); //idOfUser
+            db.Users.Update(user);
+            await db.SaveChangesAsync();
+            return View("Profile");
+        }
+        public IActionResult Edit()
+        {
+            return View();
+        }
         [HttpPost]
         public async Task<IActionResult> Edit(User user)
         {
@@ -209,10 +211,10 @@ namespace AnimeSite.Controllers
         public async Task<IActionResult> CreatePost(Post post)
         {
             // IQueryable<User> users = db.Users;
-            post.UserId = idOfUser;
+            post.UserId = db.savedID;
             db.Posts.Add(post);
             await db.SaveChangesAsync();
-            return View();
+           return  RedirectToAction("Profile");
         }
         public IActionResult CreatePost()
         {

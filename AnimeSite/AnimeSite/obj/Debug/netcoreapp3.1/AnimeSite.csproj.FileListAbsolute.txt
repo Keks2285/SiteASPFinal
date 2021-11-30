@@ -314,3 +314,6 @@ C:\Users\Oleg\Documents\GitHub\SiteASPFinal\AnimeSite\AnimeSite\obj\Debug\netcor
 C:\Users\Oleg\Documents\GitHub\SiteASPFinal\AnimeSite\AnimeSite\obj\Debug\netcoreapp3.1\AnimeSite.dll
 C:\Users\Oleg\Documents\GitHub\SiteASPFinal\AnimeSite\AnimeSite\obj\Debug\netcoreapp3.1\AnimeSite.pdb
 C:\Users\Oleg\Documents\GitHub\SiteASPFinal\AnimeSite\AnimeSite\obj\Debug\netcoreapp3.1\AnimeSite.genruntimeconfig.cache
+D:\GitHub\SiteASPFinal\AnimeSite\AnimeSite\obj\Debug\netcoreapp3.1\Razor\Views\Home\AdminPostPanel.cshtml.g.cs
+D:\GitHub\SiteASPFinal\AnimeSite\AnimeSite\obj\Debug\netcoreapp3.1\Razor\Views\Home\PostEdit.cshtml.g.cs
+D:\GitHub\SiteASPFinal\AnimeSite\AnimeSite\obj\Debug\netcoreapp3.1\Razor\Views\Home\EditByUser.cshtml.g.cs
