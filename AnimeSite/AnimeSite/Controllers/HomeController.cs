@@ -7,17 +7,56 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+
 namespace AnimeSite.Controllers
 {
     public class HomeController : Controller
     {
+        private IWebHostEnvironment _app;
         private ApplicationContext db;
         int idOfUser = 0;
-        public HomeController(ApplicationContext context)
-        {           
-            db = context;        
+        public HomeController(ApplicationContext context, IWebHostEnvironment app)
+        {
+            db = context;
+            _app = app;
         }
-        
+
+        public IActionResult AddFiles()
+        {
+            return View(db.Files.ToList());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddFiles(IFormFile file)
+        {
+            if (file != null)
+            {
+
+                string path = "/files/" + file.FileName;
+                using (FileStream fileStream = new FileStream(_app.WebRootPath + path, FileMode.Create))
+                {
+                    await file.CopyToAsync(fileStream);
+                }
+
+                FileModel fileModel = new FileModel
+                {
+                    Name = file.FileName,
+                    Path = path
+                };
+                db.Files.Add(fileModel);
+                await db.SaveChangesAsync();
+                return RedirectToAction("AdminUserPanel");
+
+
+            }
+            return RedirectToAction("AddFiles");
+        }
+    
+
+
         //////////////////////////////////////////
         public IActionResult Authorization()
         {
@@ -112,9 +151,19 @@ namespace AnimeSite.Controllers
             await db.SaveChangesAsync();
             return View("Profile");
         }
-        public IActionResult Edit()
+        public async Task<IActionResult> Edit(int? id)
         {
-            return View();
+            if (id != null)
+            {
+                User user = await db.Users.FirstOrDefaultAsync(predicate => predicate.Id == id);
+                if (user != null)
+                {
+                    return View(user);
+
+ 
+                }
+            }
+            return NotFound();
         }
         [HttpPost]
         public async Task<IActionResult> Edit(User user)

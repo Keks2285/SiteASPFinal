@@ -10,8 +10,8 @@ namespace AnimeSite.Models
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Post> Posts { get; set; }
-
-        public ApplicationContext(DbContextOptions<ApplicationContext> option): base(option)
+        public DbSet<FileModel> Files { get; set; }
+    public ApplicationContext(DbContextOptions<ApplicationContext> option): base(option)
         {
             Database.EnsureCreated();
         }

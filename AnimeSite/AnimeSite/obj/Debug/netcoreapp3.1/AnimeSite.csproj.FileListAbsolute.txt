@@ -317,3 +317,7 @@ C:\Users\Oleg\Documents\GitHub\SiteASPFinal\AnimeSite\AnimeSite\obj\Debug\netcor
 D:\GitHub\SiteASPFinal\AnimeSite\AnimeSite\obj\Debug\netcoreapp3.1\Razor\Views\Home\AdminPostPanel.cshtml.g.cs
 D:\GitHub\SiteASPFinal\AnimeSite\AnimeSite\obj\Debug\netcoreapp3.1\Razor\Views\Home\PostEdit.cshtml.g.cs
 D:\GitHub\SiteASPFinal\AnimeSite\AnimeSite\obj\Debug\netcoreapp3.1\Razor\Views\Home\EditByUser.cshtml.g.cs
+C:\Users\Oleg\Documents\GitHub\SiteASPFinal\AnimeSite\AnimeSite\obj\Debug\netcoreapp3.1\Razor\Views\Home\AddFiles.cshtml.g.cs
+C:\Users\Oleg\Documents\GitHub\SiteASPFinal\AnimeSite\AnimeSite\obj\Debug\netcoreapp3.1\Razor\Views\Home\AdminPostPanel.cshtml.g.cs
+C:\Users\Oleg\Documents\GitHub\SiteASPFinal\AnimeSite\AnimeSite\obj\Debug\netcoreapp3.1\Razor\Views\Home\EditByUser.cshtml.g.cs
+C:\Users\Oleg\Documents\GitHub\SiteASPFinal\AnimeSite\AnimeSite\obj\Debug\netcoreapp3.1\Razor\Views\Home\PostEdit.cshtml.g.cs

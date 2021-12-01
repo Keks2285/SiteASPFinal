@@ -1,0 +1,14 @@
+﻿@model IEnumerable<AnimeSite.Models.FileModel>
+@{ 
+    ViewData["Title"] = "AddFile";
+}
+<form asp-action="AddFiles" enctype="multipart/form-data">
+    <input type="file" name="file"/>
+    <input type="submit" value="Отправить"/>
+</form>
+@foreach (var f in Model)
+{ 
+
+<p><img   src="@Url.Content(f.Path)" width="250" height="200"/> </p>
+
+}
