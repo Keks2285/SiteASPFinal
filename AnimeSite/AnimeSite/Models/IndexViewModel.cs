@@ -8,10 +8,12 @@ namespace AnimeSite.Models
     public class IndexViewModel
     {
         public IEnumerable<User> Users { get; set; }
+        public User User { get; set; }
         public FilterViewModel FilterViewModel { get; set; }
         public SortViewModel SortViewModel { get; set; }
         public PageViewModel PageViewModel { get; set; }
-        public IEnumerable<Post> Post { get; set; }
+        public FilterPostViewModel FilterPostViewModel { get; set; }
+    public IEnumerable<Post> Posts { get; set; }
     }
 
    

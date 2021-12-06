@@ -13,7 +13,7 @@ namespace AnimeSite.Models
         public string Email { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
-        public byte PhotoLink { get; set; }
+        public string PhotoLink { get; set; } //byte
          public bool Admin { get; set; }
     }
     public class LogUser

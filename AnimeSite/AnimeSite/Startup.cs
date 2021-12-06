@@ -54,7 +54,7 @@ namespace AnimeSite
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Profile}/{id?}"); //Authorization AdminUserPanel Profile
+                    pattern: "{controller=Home}/{action=Profile}/{id?}"); //Authorization AdminUserPanel Profile AdminPostPanel
             });
         }
     }

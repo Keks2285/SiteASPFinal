@@ -5,15 +5,13 @@ using System.Threading.Tasks;
 
 namespace AnimeSite.Models
 {
-    public class FilterViewModel
+    public class FilterPostViewModel
     {
         public int? SelectID { get; set; }
-        public string SelectEmail { get; private set;}
-        public FilterViewModel(int? id, string email)
+        public FilterPostViewModel(int? id)
         {
-            SelectEmail = email;
+            
             SelectID = id;
         }
-
     }
 }
