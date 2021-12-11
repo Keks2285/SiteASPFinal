@@ -2,10 +2,9 @@
 @{
     ViewBag.Title = "Просмотр или изменение поста";
 }
-<form asp-action="createpost" asp-controller="home">
-    @*<div class="form-group">
-            <input type="image" asp-for="Photo" class="form-control" placeholder="Email" />
-        </div>*@
+<form asp-action="PostEditByUser" asp-controller="home">
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="UserId" />
     <div class="form-group">
         <input type="text" asp-for="Description" class="form-control" placeholder="Описание"
                style=" width:100%;" />
@@ -14,11 +13,11 @@
         <input type="number" class="form-group" min="1" max="10" asp-for="Rating" placeholder="Оценка"
                style=" width:100px" />
     </div>
-    <!--<div class="form-group" asp-for="UserID">-->
-    @*думаю по-другому*@ @*min="1" max="10"*@
 
-    <!--</div>-->
     <div class="form-group">
         <input type="submit" value="Изменить" class="btn bnt-default" />
     </div>
 </form>
+
+<a  class="btn bnt-default" asp-action="Profile" asp-controller="home">Вернуться</a>
+    

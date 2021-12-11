@@ -77,6 +77,11 @@ namespace AnimeSite.Controllers
                   return RedirectToAction("AdminUserPanel");
                 } else return RedirectToAction("Profile");
 
+
+                HttpContext.Session.SetInt32("UserId", user.Id);
+
+
+
             }
             return NotFound();
         }
@@ -143,6 +148,21 @@ namespace AnimeSite.Controllers
             return NotFound();
         }
         [HttpPost]
+        public async Task<IActionResult> PostEditByUser(Post post)
+        {
+            db.Posts.Update(post);
+            await db.SaveChangesAsync();
+            return RedirectToAction("Profile");
+        }
+
+        public async Task<IActionResult> PostEditByUser(int? id)
+        {
+            Post post = await db.Posts.FirstOrDefaultAsync(p => p.Id == id);
+            
+            return View(post);
+        }
+
+        [HttpPost]
         public async Task<IActionResult> EditByUser(User user)
         {
             db.Users.Update(user);
@@ -198,6 +218,7 @@ namespace AnimeSite.Controllers
 
         public async Task<IActionResult> AdminPostPanel(int? id, int page = 1, SortState sortorder = SortState.IdAsc)
         {
+           // ViewBag.Id = HttpContext.Session.GetInt32("UserId");
             IQueryable<Post> posts = db.Posts;
             if (id != null && id > 0)
             {

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\GitHub\\SiteASPFinal\\AnimeSite\\AnimeSite\\AnimeSite.csproj": {}
+    "C:\\Users\\Oleg\\Documents\\GitHub\\SiteASPFinal\\AnimeSite\\AnimeSite\\AnimeSite.csproj": {}
   },
   "projects": {
-    "D:\\GitHub\\SiteASPFinal\\AnimeSite\\AnimeSite\\AnimeSite.csproj": {
+    "C:\\Users\\Oleg\\Documents\\GitHub\\SiteASPFinal\\AnimeSite\\AnimeSite\\AnimeSite.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\GitHub\\SiteASPFinal\\AnimeSite\\AnimeSite\\AnimeSite.csproj",
+        "projectUniqueName": "C:\\Users\\Oleg\\Documents\\GitHub\\SiteASPFinal\\AnimeSite\\AnimeSite\\AnimeSite.csproj",
         "projectName": "AnimeSite",
-        "projectPath": "D:\\GitHub\\SiteASPFinal\\AnimeSite\\AnimeSite\\AnimeSite.csproj",
-        "packagesPath": "C:\\Users\\Ilyich\\.nuget\\packages\\",
-        "outputPath": "D:\\GitHub\\SiteASPFinal\\AnimeSite\\AnimeSite\\obj\\",
+        "projectPath": "C:\\Users\\Oleg\\Documents\\GitHub\\SiteASPFinal\\AnimeSite\\AnimeSite\\AnimeSite.csproj",
+        "packagesPath": "C:\\Users\\Oleg\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Oleg\\Documents\\GitHub\\SiteASPFinal\\AnimeSite\\AnimeSite\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Ilyich\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Oleg\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -40,6 +40,10 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "dependencies": {
+            "Microsoft.AspNetCore.Session": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[5.0.11, )"
@@ -67,7 +71,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.200\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     }

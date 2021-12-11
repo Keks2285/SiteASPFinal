@@ -27,6 +27,7 @@ namespace AnimeSite
             string connection = Configuration.GetConnectionString("DefaultConnection");
 
             services.AddDbContext<ApplicationContext>(option => option.UseSqlServer(connection));
+            services.AddSession();
             services.AddControllersWithViews();
         }
 
@@ -49,7 +50,7 @@ namespace AnimeSite
             app.UseRouting();
 
             app.UseAuthorization();
-
+            app.UseSession();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
