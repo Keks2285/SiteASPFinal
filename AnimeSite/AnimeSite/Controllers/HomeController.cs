@@ -118,6 +118,38 @@ namespace AnimeSite.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        // [ActionName("DeletePostByAdmin")]
+        public async Task<IActionResult> DeletePostByAdmin(int? id)
+        {
+            if (id != null)
+            {
+                Post post = await db.Posts.FirstOrDefaultAsync(predicate => predicate.Id == id);
+                if (post != null)
+                {
+                    return View(post);
+                }
+            }
+            return NotFound();
+        }
+        [HttpPost]
+        [ActionName("DeletePostByAdmin")]
+        public async Task<IActionResult> ConfirmDeletePostByAdmin(int? id)
+        {
+            if (id != null)
+            {
+                Post post = await db.Posts.FirstOrDefaultAsync(predicate => predicate.Id == id);
+                if (post != null)
+                {
+                    db.Posts.Remove(post);
+                    await db.SaveChangesAsync();
+                    return RedirectToAction("AdminPostPanel");
+                }
+            }
+            return NotFound();
+        }
+
         [HttpGet]
         [ActionName("Delete")] //название действия к оторому обращаемся в представлении
         public async Task<IActionResult> ConfirmDelete(int? id)

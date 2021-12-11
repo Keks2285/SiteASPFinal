@@ -3,10 +3,11 @@
     ViewData["Title"] = "Все посты";
 }
 <h1>Спиок всех постов </h1>
+<a asp-action="AdminUserPanel"> К списку пользователей</a>
 <form method="get" asp-action="AdminPostPanel">
     <div class="form-inline form-group">
         <label class="col-form-label-lg" style="margin-right:5px">Id:</label>
-        <input name="id" type="number" value="@Model.FilterPostViewModel.SelectID" min="1" class="form-group" style="border-radius: 10px 10px 10px 10px; width:70px" /> @*width*@      
+        <input name="id" type="number" value="@Model.FilterPostViewModel.SelectID" min="1" class="form-group" style="border-radius: 10px 10px 10px 10px; width:70px" /> @*width*@
     </div>
     <table class="table">
         <tr>
@@ -17,43 +18,43 @@
                 </a>
             </td>
             <td>
-              <a>
-                Описание
-              </a>
+                <a>
+                    Описание
+                </a>
             </td>
             <td>
-            <a>
-                Оценка
-            </a>
+                <a>
+                    Оценка
+                </a>
             </td>
         </tr>
         @foreach (var item in Model.Posts)
         {
-    <tr>
-        <td style="background-color: lightgray;  border-left-width:1px; border-color:dimgray;">
-            @item.Id
-        </td>
-        <td style=" border-left-width:1px; border-color:dimgray;" >
-            @item.Description
-        </td>
-        <td style="background-color: lightgray;  border-left-width:1px; border-color:dimgray;">
-            @item.Rating
-        </td>
-        @*<td style="border-width:1px; border-color:dimgray;">
-                    <a asp-action="Details" asp-controller="home" asp-route-id="@item.Id"
-                       style="margin-left: 10px;background-color: greenyellow;border-radius: 10px 10px 10px 10px;"> &nbsp Подробнее &nbsp</a>
-                    <a asp-action="Delete" asp-controller="home" asp-route-id="@item.Id" style="margin-left: 10px;
+            <tr>
+                <td style="background-color: lightgray;  border-left-width:1px; border-color:dimgray;">
+                    @item.Id
+                </td>
+                <td style=" border-left-width:1px; border-color:dimgray;">
+                    @item.Description
+                </td>
+                <td style="background-color: lightgray;  border-left-width:1px; border-color:dimgray;">
+                    @item.Rating
+                </td>
+                <td style="border-width:1px; border-color:dimgray;">
+                    @*<a asp-action="Details" asp-controller="home" asp-route-id="@item.Id"
+                        style="margin-left: 10px;background-color: greenyellow;border-radius: 10px 10px 10px 10px;"> &nbsp Подробнее &nbsp</a>*@
+                    <a asp-action="DeletePostByAdmin" asp-controller="home" asp-route-id="@item.Id" style="margin-left: 10px;
         margin-right: 10px;
         background-color: red;
         border-radius: 10px 10px 10px 10px;">&nbsp X &nbsp</a>
-                    <a asp-action="Edit" asp-controller="home" asp-route-id="@item.Id"
-                       style="margin-left: 10px;
-        margin-right: 10px;
-        background-color: #FFD700;
-        border-radius: 10px 10px 10px 10px;"> &nbsp Изменить &nbsp </a>
-                </td>*@
+                    @*<a asp-action="Edit" asp-controller="home" asp-route-id="@item.Id"
+                                       style="margin-left: 10px;
+                        margin-right: 10px;
+                        background-color: #FFD700;
+                        border-radius: 10px 10px 10px 10px;"> &nbsp Изменить &nbsp </a>*@
+                </td>
 
-    </tr>
+            </tr>
         }
     </table>
     @if (Model.PageViewModel.HasPreviousPage)
@@ -61,7 +62,7 @@
         <a asp-route-page="@(Model.PageViewModel.PageNumber-1)"
            asp-route-sortOrder="Model.SortViewModel.Current"
            asp-route-id="Model.FilterViewModel.SelectId"
-          class="btn btn-outline-dark">Назад </a>
+           class="btn btn-outline-dark">Назад </a>
     }
     @if (Model.PageViewModel.HasNextPage)
     {
@@ -70,6 +71,7 @@
            asp-route-id="Model.FilterPostViewModel.SelectId"
            class="btn btn-outline-dark">Вперед</a>
     }
+    
 
 </form>
 
