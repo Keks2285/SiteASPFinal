@@ -17,8 +17,7 @@
 </head>
 
 <body>
-    <a style="font-size:20px" asp-action="Create">Добавить пользователя</a>
-    
+    <a style="font-size:20px" asp-action="Create">Добавить пользователя</a>    
     <form method="get" asp-action="AdminUserPanel">
         <a asp-action="AdminPostPanel"> К списку поcтов</a>
         <div class="form-inline form-group">
@@ -38,20 +37,20 @@
     <table class="table">
         <tr>
             <td>
-                <a asp-action="AdminUserPanel" asp-route-sortOrder="@Model.SortViewModel.IdSort"
+                <a @*asp-action="AdminUserPanel" asp-route-sortOrder="@Model.SortViewModel.IdSort"
                    asp-route-id="@Model.FilterViewModel.SelectID"
-                   asp-route-email="@Model.FilterViewModel.SelectEmail">
+                   asp-route-email="@Model.FilterViewModel.SelectEmail"*@>
                     ID
                 </a>
             </td>
             <td>
-                <a asp-action="AdminUserPanel" asp-route-sortOrder="@Model.SortViewModel.EmailSort"
+                <a @*asp-action="AdminUserPanel" asp-route-sortOrder="@Model.SortViewModel.EmailSort"
                    asp-route-id="@Model.FilterViewModel.SelectID"
-                   asp-route-email="@Model.FilterViewModel.SelectEmail">
+                   asp-route-email="@Model.FilterViewModel.SelectEmail"*@>
                     Email
                 </a>
             </td>
-            <td style="color:dodgerblue">
+            <td >
                 Login
             </td>
         </tr>

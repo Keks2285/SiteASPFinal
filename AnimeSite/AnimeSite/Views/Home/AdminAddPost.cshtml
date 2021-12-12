@@ -1,0 +1,22 @@
+﻿@model AnimeSite.Models.Post
+@{
+    ViewBag.Title = "Создвние поста";
+}
+
+<form asp-action="AdminAddPost" asp-controller="home">
+    <div class="form-group">
+        <input type="text" asp-for="Description" class="form-control" placeholder="Описание"
+               style=" width:100%;" />
+    </div>
+    <div class="form-group">
+        <input type="number" class="form-group" min="1" max="10" asp-for="Rating" placeholder="Оценка"
+               style=" width:100px" />
+    </div>
+    <div class="form-group">
+        <input type="number" class="form-group" min="1"  asp-for="UserId"  placeholder="Id пользователя"
+               style=" width:100px" />
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Создать" class="btn bnt-default" />
+    </div>
+</form>

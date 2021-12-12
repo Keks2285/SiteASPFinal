@@ -9,6 +9,7 @@ namespace AnimeSite.Models
     {
         public int? SelectID { get; set; }
         public string SelectEmail { get; private set;}
+       // public string SelectLogin { get; private set; }
         public FilterViewModel(int? id, string email)
         {
             SelectEmail = email;

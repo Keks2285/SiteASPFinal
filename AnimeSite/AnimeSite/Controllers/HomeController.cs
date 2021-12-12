@@ -17,7 +17,7 @@ namespace AnimeSite.Controllers
     {
         private IWebHostEnvironment _app;
         private ApplicationContext db;
-        int idOfUser = 1;
+        int idOfUser;
         public HomeController(ApplicationContext context, IWebHostEnvironment app)
         {
             db = context;
@@ -66,24 +66,25 @@ namespace AnimeSite.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Authorization(LogUser a)
+        public async Task<IActionResult> Authorization(User a)
         {
             User user = await db.Users.FirstOrDefaultAsync(predicate => predicate.Login == a.Login && predicate.Password == a.Password);
             if (user != null)
             {
-                idOfUser = user.Id;
-                if (user.Admin == true) 
-                {                 
-                  return RedirectToAction("AdminUserPanel");
-                } else return RedirectToAction("Profile");
-
-
-                HttpContext.Session.SetInt32("UserId", user.Id);
-
+               // idOfUser = user.Id;
+                if (user.Admin == true)
+                {
+                    return RedirectToAction("AdminUserPanel");
+                }
+                else
+                {
+                    HttpContext.Session.SetInt32("UserId", user.Id);
+                    return RedirectToAction("Profile");
+                }
 
 
             }
-            return NotFound();
+            return RedirectToAction("Registration");
         }
         ///////////////////////////////////////////
         public IActionResult Index()
@@ -179,6 +180,21 @@ namespace AnimeSite.Controllers
             }
             return NotFound();
         }
+
+        [HttpPost]
+        public async Task<IActionResult> AdminEditPost(Post post)
+        {
+            db.Posts.Update(post);
+            await db.SaveChangesAsync();
+            return RedirectToAction("AdminPostPanel");
+        }
+
+        public async Task<IActionResult> AdminEditPost(int? id)
+        {
+            Post post = await db.Posts.FirstOrDefaultAsync(p => p.Id == id);
+            return View(post);
+        }
+
         [HttpPost]
         public async Task<IActionResult> PostEditByUser(Post post)
         {
@@ -205,7 +221,7 @@ namespace AnimeSite.Controllers
         public async Task<IActionResult> EditByUser()
         {
 
-             User user = await db.Users.FirstOrDefaultAsync(predicate => predicate.Id == idOfUser);
+             User user = await db.Users.FirstOrDefaultAsync(predicate => predicate.Id == HttpContext.Session.GetInt32("UserId"));
                 
                     return View(user);                       
             //User user = await db.Users.FirstOrDefaultAsync(predicate => predicate.Id == idOfUser); //idOfUser
@@ -247,8 +263,25 @@ namespace AnimeSite.Controllers
 
         }
         /////////////////////////
-
-        public async Task<IActionResult> AdminPostPanel(int? id, int page = 1, SortState sortorder = SortState.IdAsc)
+        public async Task<IActionResult> ViewPosts(int? id, int page = 1)
+        {
+            IQueryable<Post> posts = db.Posts;
+            if (id != null && id > 0)
+            {
+                posts = posts.Where(p => p.UserId == id);
+            }
+            int pagesize = 5;
+            var count = await posts.CountAsync();
+            var item = await posts.Skip((page - 1) * pagesize).Take(pagesize).ToArrayAsync();
+            IndexViewModel viewModel = new IndexViewModel
+            {
+                FilterPostViewModel = new FilterPostViewModel(id),
+                PageViewModel = new PageViewModel(count, page, pagesize),                
+                Posts = item
+            };
+            return View(viewModel);
+        }
+            public async Task<IActionResult> AdminPostPanel(int? id, int page = 1, SortState sortorder = SortState.IdAsc)
         {
            // ViewBag.Id = HttpContext.Session.GetInt32("UserId");
             IQueryable<Post> posts = db.Posts;
@@ -281,43 +314,66 @@ namespace AnimeSite.Controllers
             };
             return View(viewModel);
         }
-            public async Task<IActionResult> AdminUserPanel(int? id, string email, int page=1, SortState sortorder = SortState.IdAsc)
+
+        public async Task<IActionResult> SearchUsers(string login, int page = 1)
         {
-
             IQueryable<User> users = db.Users;
-            // Фильтрация или поиск
+            if (!String.IsNullOrEmpty(login))
+            {
+                users = users.Where(p => p.Login.Contains(login));
+            }
 
-            if (id != null && id > 0)
+            int pagesize = 5;
+            var count = await users.CountAsync();
+            var item = await users.Skip((page - 1) * pagesize).Take(pagesize).ToArrayAsync();
+
+            IndexViewModel viewModel = new IndexViewModel
             {
-                users = users.Where(p => p.Id == id);
-            }
-            if (!String.IsNullOrEmpty(email))
+                FilterUsersViewModel = new FilterUsersViewModel(login),
+                PageViewModel = new PageViewModel(count, page, pagesize),
+                Users = item
+            };
+            return View(viewModel);
+        }
+
+
+            public async Task<IActionResult> AdminUserPanel(int? id, string email, int page=1, SortState sortorder = SortState.IdAsc)
             {
-                users = users.Where(p => p.Email.Contains(email));
-            }
-            //сортировка
-            switch (sortorder)
-            {
-                case SortState.IdAsc:
-                    {
-                        users = users.OrderBy(p => p.Id);
-                        break;
-                    }
-                case SortState.IdDesc:
-                    {
-                        users = users.OrderByDescending(p => p.Id);
-                        break;
-                    }
-                case SortState.EmailAsc:
-                    {
-                        users = users.OrderBy(p => p.Email);
-                        break;
-                    }
-                case SortState.EmailDesc:
-                    {
-                        users = users.OrderByDescending(p => p.Email);
-                        break;
-                    }
+
+                IQueryable<User> users = db.Users;
+                // Фильтрация или поиск
+
+                if (id != null && id > 0)
+                {
+                    users = users.Where(p => p.Id == id);
+                }
+                if (!String.IsNullOrEmpty(email))
+                {
+                    users = users.Where(p => p.Email.Contains(email));
+                }
+                //сортировка
+                switch (sortorder)
+                {
+                    case SortState.IdAsc:
+                        {
+                            users = users.OrderBy(p => p.Id);
+                            break;
+                        }
+                    case SortState.IdDesc:
+                        {
+                            users = users.OrderByDescending(p => p.Id);
+                            break;
+                        }
+                    case SortState.EmailAsc:
+                        {
+                            users = users.OrderBy(p => p.Email);
+                            break;
+                        }
+                    case SortState.EmailDesc:
+                        {
+                            users = users.OrderByDescending(p => p.Email);
+                            break;
+                        }
             };
             // Пaгинация
             int pagesize = 5;
@@ -337,9 +393,9 @@ namespace AnimeSite.Controllers
         /////////////////////////
         public async Task<IActionResult>  Profile()
         {
-            User user = await db.Users.FirstOrDefaultAsync(predicate => predicate.Id == idOfUser);
+            User user = await db.Users.FirstOrDefaultAsync(predicate => predicate.Id == HttpContext.Session.GetInt32("UserId"));
             IQueryable<Post> post = db.Posts;
-            post= post.Where(p => p.UserId==idOfUser);
+            post= post.Where(p => p.UserId== HttpContext.Session.GetInt32("UserId"));
             int pagesize = 10;
             int page = 1;
             var item = await post.Skip((page - 1) * pagesize).Take(pagesize).ToArrayAsync();
@@ -351,11 +407,25 @@ namespace AnimeSite.Controllers
             };
             return View(viewModel);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> AdminAddPost(Post post)
+        {
+            db.Posts.Add(post);
+            await db.SaveChangesAsync();
+            return RedirectToAction("AdminPostPanel");
+        }
+        public IActionResult AdminAddPost()
+        {
+            return View();
+        }
+
+
+
         [HttpPost]
         public async Task<IActionResult> CreatePost(Post post)
-        {
-            // IQueryable<User> users = db.Users;
-            post.UserId = idOfUser;
+        {          
+            post.UserId = (int)HttpContext.Session.GetInt32("UserId");
             db.Posts.Add(post);
             await db.SaveChangesAsync();
            return  RedirectToAction("Profile");
