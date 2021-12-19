@@ -47,7 +47,7 @@ namespace AnimeSite.Controllers
                     Path = path
                 };
                 // db.Files.Add(fileModel);
-                User user = await db.Users.FirstOrDefaultAsync(predicate => predicate.Id == idOfUser);
+                User user = await db.Users.FirstOrDefaultAsync(predicate => predicate.Id == HttpContext.Session.GetInt32("UserId"));
                 user.PhotoLink = path;
                 db.Users.Update(user);
                 await db.SaveChangesAsync();
