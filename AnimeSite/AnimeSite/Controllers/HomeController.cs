@@ -17,7 +17,6 @@ namespace AnimeSite.Controllers
     {
         private IWebHostEnvironment _app;
         private ApplicationContext db;
-        int idOfUser;
         public HomeController(ApplicationContext context, IWebHostEnvironment app)
         {
             db = context;
@@ -28,7 +27,18 @@ namespace AnimeSite.Controllers
         //{
         //    return View(db.Files.ToList());
         //}
+        //[HttpPost]
+        //public async Task<IActionResult> AddPhotoPost(IFormFile file)
+        //{
+        //    string path = "/files/" + file.FileName;
+        //    using (FileStream fileStream = new FileStream(_app.WebRootPath + path, FileMode.Create))
+        //    {
+        //        await file.CopyToAsync(fileStream);
+        //    }
+        //    await db.SaveChangesAsync();
 
+        //    //return RedirectToAction("Profile");
+        //}
         [HttpPost]
         public async Task<IActionResult> AddFiles(IFormFile file)
         {
@@ -206,8 +216,11 @@ namespace AnimeSite.Controllers
         public async Task<IActionResult> PostEditByUser(int? id)
         {
             Post post = await db.Posts.FirstOrDefaultAsync(p => p.Id == id);
-            
-            return View(post);
+            IndexViewModel viewModel = new IndexViewModel
+            {
+                Post = post
+            };
+            return View(viewModel);
         }
 
         [HttpPost]
@@ -222,7 +235,7 @@ namespace AnimeSite.Controllers
         {
 
              User user = await db.Users.FirstOrDefaultAsync(predicate => predicate.Id == HttpContext.Session.GetInt32("UserId"));
-                
+             user.PhotoLink = user.PhotoLink; 
                     return View(user);                       
             //User user = await db.Users.FirstOrDefaultAsync(predicate => predicate.Id == idOfUser); //idOfUser
             //db.Users.Update(user);
@@ -234,6 +247,7 @@ namespace AnimeSite.Controllers
             if (id != null)
             {
                 User user = await db.Users.FirstOrDefaultAsync(predicate => predicate.Id == id);
+                user.PhotoLink = user.PhotoLink;
                 if (user != null)
                 {
                     return View(user);
@@ -423,8 +437,14 @@ namespace AnimeSite.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> CreatePost(Post post)
-        {          
+        public async Task<IActionResult> CreatePost(Post post, IFormFile file)
+        {
+             string path = "/files/" + file.FileName;
+            using (FileStream fileStream = new FileStream(_app.WebRootPath + path, FileMode.Create))
+            {
+                await file.CopyToAsync(fileStream);
+            }
+            post.Photo = path;
             post.UserId = (int)HttpContext.Session.GetInt32("UserId");
             db.Posts.Add(post);
             await db.SaveChangesAsync();

@@ -86,16 +86,16 @@
     @if (Model.PageViewModel.HasPreviousPage)
     {
         <a asp-route-page="@(Model.PageViewModel.PageNumber-1)"
-           asp-route-sortOrder="Model.SortViewModel.Current"
+           asp-route-sortOrder="@Model.SortViewModel.Current"
            asp-route-id="Model.FilterViewModel.SelectId"
            asp-route-email="Model.FilterViewModel.SelectEmail" class="btn btn-outline-dark">Назад </a>
     }
     @if (Model.PageViewModel.HasNextPage)
     {
         <a asp-route-page="@(Model.PageViewModel.PageNumber+1)"
-           asp-route-sortOrder="Model.SortViewModel.Current"
+           asp-route-sortOrder="@Model.SortViewModel.Current"
            asp-route-id="Model.FilterViewModel.SelectId"
-           asp-route-email="Model.FilterViewModel.SelectEmail" class="btn btn-outline-dark">Вперед</a>
+           asp-route-email="@Model.FilterViewModel.SelectEmail" class="btn btn-outline-dark">Вперед</a>
     }
 </body>
 </html>

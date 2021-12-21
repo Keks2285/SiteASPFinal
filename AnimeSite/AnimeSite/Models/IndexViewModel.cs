@@ -15,6 +15,7 @@ namespace AnimeSite.Models
         public FilterPostViewModel FilterPostViewModel { get; set; }
         public FilterUsersViewModel FilterUsersViewModel { get; set; }
         public IEnumerable<Post> Posts { get; set; }
+        public Post Post { get; set; }
     }
 
    

@@ -1,23 +1,26 @@
-﻿@model AnimeSite.Models.Post
+﻿@model AnimeSite.Models.IndexViewModel
 @{
     ViewBag.Title = "Просмотр или изменение поста";
 }
 <form asp-action="PostEditByUser" asp-controller="home">
-    <input type="hidden" asp-for="Id" />
-    <input type="hidden" asp-for="UserId" />
+    <input type="hidden" asp-for="@Model.Post.Id" />
+    <input type="hidden" asp-for="@Model.Post.UserId" />
     <div class="form-group">
-        <input type="text" asp-for="Description" class="form-control" placeholder="Описание"
+        <input type="text" asp-for="@Model.Post.Description" class="form-control" placeholder="Описание"
                style=" width:100%;" />
     </div>
     <div class="form-group">
-        <input type="number" class="form-group" min="1" max="10" asp-for="Rating" placeholder="Оценка"
+        <input type="number" class="form-group" min="1" max="10" asp-for="@Model.Post.Rating" placeholder="Оценка"
                style=" width:100px" />
     </div>
-
+    
     <div class="form-group">
         <input type="submit" value="Изменить" class="btn bnt-default" />
     </div>
 </form>
-
+<div class="form-group">
+    <input type="image" class="form-group"
+           style=" width:100px;height:100px" src="@Model.Post.Photo" />
+</div>
 <a  class="btn bnt-default" asp-action="Profile" asp-controller="home">Вернуться</a>
     
